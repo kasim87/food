@@ -171,7 +171,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const element = document.createElement('div')
 
             if (this.classes.length === 0) {
-                this.element = 'menu_item'
+                this.element = 'menu__item'
                 element.classList.add(this.element)
             } else {
                 this.classes.forEach(className => element.classList.add(className))
