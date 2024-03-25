@@ -225,6 +225,10 @@ window.addEventListener('DOMContentLoaded', () => {
         failure: 'Что-то пошло не так....'
     }
 
+    forms.forEach(item => {
+        postData(item)
+    })
+
     function postData(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault()
@@ -237,7 +241,7 @@ window.addEventListener('DOMContentLoaded', () => {
             `
             form.insertAdjacentElement('afterend', statusMessage)
 
-            const formData = new formData(form)
+            const formData = new FormData(form)
 
             const object = {};
             formData.forEach(function(value, key){
@@ -250,9 +254,7 @@ window.addEventListener('DOMContentLoaded', () => {
                     'Content-type': 'application/jsonn'
                 },
                 body: JSON.stringify(object)
-            })
-            .then(data => data.text())
-            .then(data => {
+            }).then(data => data.text()).then(data => {
                 console.log(data)
                 showThanksModal(message.success)
                 form.reset()
@@ -279,7 +281,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 <div class="modal__title">${message}</div>
             </div>
         `
-        
+
         document.querySelector('.modal').append(thanksModal)
         setTimeout(() => {
             thanksModal.remove()
