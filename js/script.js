@@ -325,7 +325,6 @@ window.addEventListener('DOMContentLoaded', () => {
           dots = []
         ;
 
-    indicators.classList.add('carousel-indicators')
     indicators.style.cssText = `
         position: absolute;
         right: 0;
@@ -432,4 +431,5 @@ window.addEventListener('DOMContentLoaded', () => {
             dotsOpacity()
         })
     })
+
 })
