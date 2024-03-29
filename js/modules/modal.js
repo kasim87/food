@@ -1,42 +1,47 @@
-function modal() {
-    const modalTrigger = document.querySelectorAll('[data-modal]'),
-          modal = document.querySelector('.modal')
-        ;
+function openModel(modalSelector, modalTimerId) {
+    const modal = document.querySelector(modalSelector)
 
-    function openModel() {
-        modal.classList.add('show')
-        modal.classList.remove('hide')
-        document.body.style.overflow = 'hidden'
+    modal.classList.add('show')
+    modal.classList.remove('hide')
+    document.body.style.overflow = 'hidden'
+
+    console.log(modalTimerId)
+    if (modalTimerId) {
         clearInterval(modalTimerId)
     }
+}
+
+function closeMode(modalSelector) {
+    const modal = document.querySelector(modalSelector) 
+    modal.classList.add('hide')
+    modal.classList.remove('show')
+    document.body.style.overflow = ''
+}
+
+function modal(triggerSelector, modalSelector, modalTimerId) {
+    const modalTrigger = document.querySelectorAll(triggerSelector),
+          modal = document.querySelector(modalSelector)
+        ;
 
     modalTrigger.forEach(btn => {
-        btn.addEventListener('click', openModel)
+        btn.addEventListener('click', () => openModel(modalSelector, modalTimerId))
     })
-
-    function closeMode() {
-        modal.classList.add('hide')
-        modal.classList.remove('show')
-        document.body.style.overflow = ''
-    }
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.getAttribute('data-close') == '') {
-            closeMode()
+            closeMode(modalSelector)
         }
     })
 
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && modal.classList.contains('show')) {
-            closeMode()
+            closeMode(modalSelector)
         }
     })
 
-    const modalTimerId = setTimeout(openModel, 5000)
-
     function showModalByScroll() {
         if (window.pageXOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight-1) {
-            openModel()
+            openModel(modalSelector, modalTimerId)
             window.removeEventListener('scroll', showModalByScroll)
         }
     }
@@ -44,4 +49,6 @@ function modal() {
     window.addEventListener('scroll', showModalByScroll)
 }
 
-module.exports = modal
+export default modal
+export {openModel}
+export {closeMode}
