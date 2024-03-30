@@ -1,22 +1,31 @@
-import tabs from './modules/tabs'
-import timer from './modules/timer'
-import modal from './modules/modal'
-import card from './modules/card'
-import form from './modules/form'
-import slider from './modules/slider'
-import calc from './modules/calculator'
-import openModel from './modules/modal'
+import tabs from './modules/tabs';
+import timer from './modules/timer';
+import modal from './modules/modal';
+import card from './modules/card';
+import form from './modules/form';
+import slider from './modules/slider';
+import calc from './modules/calculator';
+import openModel from './modules/modal';
 
 window.addEventListener('DOMContentLoaded', () => {
 
     const modalTimerId = setTimeout(() => openModel('.modal', modalTimerId), 300000)
 
     tabs('.tabheader__item', '.tabcontent', '.tabheader__items', 'tabheader__item_active')
-    timer('.timer', '2024-06-01')
+    timer('2024-06-01')
     modal('[data-modal]', '.modal', modalTimerId)
     card()
     form('form', modalTimerId)
-    slider()
+    slider({
+        slide: '.offer__slide',
+        container: '.offer__slider',
+        prevArraw: '.offer__slider-prev',
+        nextArraw: '.offer__slider-next',
+        currentCounter: '#current',
+        totalCurrent: '#total',
+        wrapper: '.offer__slider-wrapper',
+        field: '.offer__slider-inner'
+    })
     calc()
 })
 

@@ -1,4 +1,4 @@
-import getResource from '../services/services'
+import {getResource} from '../services/services'
 
 function card() {
     class MenuCard {
@@ -42,12 +42,12 @@ function card() {
         }
     }
 
-    getResource('http://localhost:3000/menu')
-        .then(data => {
+    getResource('http://localhost:3000/menu').then(data => {
+            console.log(data)
             data.forEach(({img, altimg, title, descr, price}) => {
                 new MenuCard(img, altimg, title, descr, price, '.menu .container').render()
             })
-        })
+        });
 }
 
 export default card
